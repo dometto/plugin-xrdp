@@ -14,7 +14,7 @@
     - name: Install xfce without recommends
       apt:
         name: xfce4
-        install_recommends: false
+        install_recommends: no
         state: present
 
     - name: Install packages
@@ -34,10 +34,10 @@
       service:
         name: xrdp
         state: restarted
-        enabled: true
+        enabled: yes
 
     - name: Start xrdp-sesman
       service:
         name: xrdp-sesman
         state: restarted
-        enabled: true
+        enabled: yes
