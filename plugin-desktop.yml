@@ -1,0 +1,43 @@
+---
+- name: Install desktop environment on Ubuntu
+  hosts:
+    - localhost
+  gather_facts: false
+  tasks:
+    - name: Wait for system to become reachable
+      wait_for_connection:
+        timeout: 300
+
+    - name: Gather facts for first time
+      setup:
+
+    - name: Install xfce without recommends
+      apt:
+        name: xfce4
+        install_recommends: false
+        state: present
+
+    - name: Install packages
+      package:
+        name:
+          - xrdp
+          - gnome
+        state: present
+
+    - name: Copy xrdp-sesman pam module
+      copy:
+        src: files/pam-xrdp-sesman
+        dest: /etc/pam.d/xrdp-sesman
+        mode: 0644
+
+    - name: Start xrdp
+      service:
+        name: xrdp
+        state: restarted
+        enabled: true
+
+    - name: Start xrdp-sesman
+      service:
+        name: xrdp-sesman
+        state: restarted
+        enabled: true
