@@ -21,7 +21,6 @@
       package:
         name:
           - xrdp
-          - gnome
         state: present
 
     - name: Copy xrdp-sesman pam module
