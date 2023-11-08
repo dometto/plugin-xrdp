@@ -25,11 +25,11 @@
           - xauth
         state: present
     
-      - name: Install gdm without recommends
-        apt:
-          name: gdm3
-          install_recommends: no
-          state: present
+    - name: Install gdm without recommends
+      apt:
+        name: gdm3
+        install_recommends: no
+        state: present
 
     # - name: Copy xrdp-sesman pam module
     #   copy:
