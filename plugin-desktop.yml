@@ -18,11 +18,19 @@
         update_cache: yes
         state: present
 
+    - name: Install xorgxrdp without recommends
+      apt:
+        name: xorgxrdp
+        install_recommends: no
+        update_cache: yes
+        state: present
+
     - name: Install packages
       package:
         name:
           - xrdp
           - xauth
+          - xfce4-terminal
         state: present
     
     - name: Install gdm without recommends
@@ -31,11 +39,11 @@
         install_recommends: no
         state: present
 
-    # - name: Copy xrdp-sesman pam module
-    #   copy:
-    #     src: files/pam-xrdp-sesman
-    #     dest: /etc/pam.d/xrdp-sesman
-    #     mode: 0644
+    - name: Copy xrdp-sesman pam module
+      copy:
+        src: files/pam-xrdp-sesman
+        dest: /etc/pam.d/xrdp-sesman
+        mode: 0644
 
     - name: Start xrdp
       service:
