@@ -15,22 +15,27 @@
       apt:
         name: xfce4
         install_recommends: no
+        update_cache: yes
         state: present
 
-    #  xauth   xautolock   xfce4   xfce4-clipman-plugin   xfce4-cpugraph-plugin   xfce4-netload-plugin   xfce4-screenshooter   xfce4-taskmanager   xfce4-terminal   xfce4-xkb-plugin   xorgxrdp   xprintidle   xrdp
-    # https://github.com/danielguerra69/ubuntu-xrdp
     - name: Install packages
       package:
         name:
           - xrdp
           - xauth
         state: present
+    
+      - name: Install gdm without recommends
+      apt:
+        name: gdm3
+        install_recommends: no
+        state: present
 
-    - name: Copy xrdp-sesman pam module
-      copy:
-        src: files/pam-xrdp-sesman
-        dest: /etc/pam.d/xrdp-sesman
-        mode: 0644
+    # - name: Copy xrdp-sesman pam module
+    #   copy:
+    #     src: files/pam-xrdp-sesman
+    #     dest: /etc/pam.d/xrdp-sesman
+    #     mode: 0644
 
     - name: Start xrdp
       service:
